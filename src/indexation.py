@@ -12,10 +12,9 @@ print("Starting Indexation Process")
 cluster = Cluster(['cassandra'])
 session = cluster.connect()
 
-print("Sana")
 # Select data from a table
 result_set = session.execute("SELECT * FROM mykeyspace.mytable ;")
-print("Asmaa")
+
 
 reformat_objects = []
 # Loop over the result set and print each row
