@@ -1,0 +1,45 @@
+version: "3.9"
+services:
+  cassandra:
+    image: cassandra:latest
+    container_name: cassandra
+    ports:
+      - "9042:9042"
+    networks:
+      - cassandra-net
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.0.0
+    container_name: elasticsearch
+    environment:
+      - "discovery.type=single-node"
+    ports:
+      - "9200:9200"
+    networks:
+      - elastic-net
+  kibana:
+    image: docker.elastic.co/kibana/kibana:6.0.0
+    container_name: kibana
+    environment:
+      ELASTICSEARCH_HOSTS: '["http://elasticsearch:9200"]'
+    ports:
+      - "5601:5601"
+    networks:
+      - elastic-net
+    depends_on:
+      python:
+        condition: service_completed_successfully
+  python:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: python
+    depends_on:
+      - cassandra
+      - elasticsearch
+    networks:
+      - cassandra-net
+      - elastic-net
+    command: sh -c 'python3 etl.py && sleep 10 && python3 indexation.py'
+networks:
+  cassandra-net:
+  elastic-net:
