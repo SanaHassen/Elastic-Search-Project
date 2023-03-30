@@ -1,6 +1,6 @@
 # Covid-19 tracker around the world
 
-The project aims to provide an efficient solution for analyzing and visualizing data on COVID-19, which can be found at https://github.com/CSSEGISandData/COVID-19. To achieve this, we are utilizing a technology stack that includes Elasticsearch, Kibana, and Cassandra, all orchestrated using Docker Compose to implement the pipeline shown below
+The project aims to provide an efficient solution for analyzing and visualizing data on COVID-19, which can be found at https://github.com/CSSEGISandData/COVID-19. To achieve this, we are utilizing a technology stack that includes Elasticsearch, Kibana, and Cassandra, all orchestrated using Docker Compose to implement the pipeline shown below:
 
 ![HomeView](images/archtecture.PNG)
 
